@@ -33,6 +33,18 @@ public object FirebirdConf {
         val firebirdLockPath = File(firebirdTempRootPath, "lock")
         firebirdLockPath.mkdirs()
 
+        val firebirdIntlPath = File(firebirdTempRootPath, "intl")
+        firebirdIntlPath.mkdirs()
+
+        val firebirdLibPath = File(firebirdTempRootPath, "lib")
+        firebirdLibPath.mkdirs()
+
+        val firebirdUdrPath = File(firebirdTempRootPath, "plugins/udr")
+        firebirdUdrPath.mkdirs()
+
+        val firebirdUdfPath = File(firebirdTempRootPath, "UDF")
+        firebirdUdfPath.mkdirs()
+
         val assetManager = context.assets
         val buffer = ByteArray(1024)
 
