@@ -475,16 +475,14 @@ bool IntlManager::initialize()
 					if (!exists)
 					{
 						mod = ModuleLoader::fixAndLoadModule(status, filename);
-						if (mod)
+#ifdef ANDROID
+						if (!mod)
 						{
-							exists = modules->exist(filename);
-							if (exists)
-							{
-								// Module was already loaded, forget it
-								delete mod;
-								mod = nullptr;
-							}
+							PathName path, file;
+							PathUtils::splitLastComponent(path, file, filename);
+							mod = ModuleLoader::fixAndLoadModule(status, file);
 						}
+#endif
 					}
 
 					if (!exists)

@@ -56,6 +56,7 @@
 #include "../common/classes/ClumpletReader.h"
 #include "../common/StatusArg.h"
 #include "../common/TimeZoneUtil.h"
+#include "../common/config/config.h"
 
 #ifdef WIN_NT
 #include <direct.h>
@@ -1040,6 +1041,23 @@ bool bootBuild()
 Firebird::PathName getPrefix(unsigned int prefType, const char* name)
 {
 	Firebird::PathName s;
+
+#ifdef ANDROID
+const bool useInstallDir =
+		prefType == Firebird::IConfigManager::DIR_BIN ||
+		prefType == Firebird::IConfigManager::DIR_SBIN ||
+		prefType == Firebird::IConfigManager::DIR_LIB ||
+		prefType == Firebird::IConfigManager::DIR_GUARD ||
+		prefType == Firebird::IConfigManager::DIR_PLUGINS;
+
+	if (useInstallDir)
+		s = name;
+	else
+		PathUtils::concatPath(s, Firebird::Config::getRootDirectory(), name);
+
+	return s;
+#else
+
 	char tmp[MAXPATHLEN];
 
 	const char* configDir[] = {
@@ -1145,6 +1163,7 @@ Firebird::PathName getPrefix(unsigned int prefType, const char* name)
 	s += name;
 	gds__prefix(tmp, s.c_str());
 	return tmp;
+#endif
 }
 
 unsigned int copyStatus(ISC_STATUS* const to, const unsigned int space,

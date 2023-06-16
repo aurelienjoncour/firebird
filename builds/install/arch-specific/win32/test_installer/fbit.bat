@@ -34,7 +34,7 @@
 ::@PROMPT=fbit_prompt$G
 
 :: Set this to the location of the firebird installer you want to test.
-::@set FBINST_EXEC=%USERPROFILE%\Desktop\Firebird-4.0.0.21234_x64.exe
+::@set FBINST_EXEC=%USERPROFILE%\Desktop\Firebird-5.0.0.0000_x64.exe
 
 :: if we have just built firebird we can test the install immediately
 if defined FBBUILD_FILE_ID (
@@ -47,12 +47,12 @@ if defined FBBUILD_FILE_ID (
 rem FBINST_EXEC must point to the package we want to test...
     if not defined FBINST_EXEC (
     rem Set the actual path and filename here - or set it in the environment before running fbit.
-    set FBINST_EXEC=%USERPROFILE%\Desktop\Firebird-4.0.0.2311_0_x64_RC1.exe
+    set FBINST_EXEC=%USERPROFILE%\Desktop\Firebird-5.0.0.0000_0_x64_RC1.exe
     )
 )
 
 :: This should be set dynamically, perhaps. But for now it is hard-coded.
-@set FIREBIRD_BASE_VER=Firebird_4_0
+@set FIREBIRD_BASE_VER=Firebird_5_0
 
 :: It is possible that successive installs into the same directory may
 :: generate different uninstallers but for now we hard code the default.

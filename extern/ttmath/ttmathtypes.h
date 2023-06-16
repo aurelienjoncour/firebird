@@ -142,7 +142,6 @@
 
 #endif
 
-#define TTMATH_NOASM
 
 namespace ttmath
 {

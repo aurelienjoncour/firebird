@@ -102,8 +102,13 @@ namespace
 			if (FB_TZDATADIR[0])
 				temp = FB_TZDATADIR;
 			else
+			{
+#ifdef ANDROID
+				temp = Config::getRootDirectory();
+#else
 				PathUtils::concatPath(temp, Config::getRootDirectory(), "tzdata");
-
+#endif
+			}
 			const static char* const ICU_TIMEZONE_FILES_DIR = "ICU_TIMEZONE_FILES_DIR";
 
 			// Do not update ICU_TIMEZONE_FILES_DIR if it's already set.
